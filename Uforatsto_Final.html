@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UFORATSTO INC</title>
+  <style>
+    :root { --accent:#0d6efd; --bg:#f9f9f9; --text:#333; }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;}
+    body{background:var(--bg);color:var(--text);line-height:1.6;}
+    header{background:#fff;padding:1.5rem 5vw;box-shadow:0 2px 6px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.25rem;}
+    h1{font-size:1.8rem;font-weight:700;color:var(--accent);}  
+    .tagline{font-size:.9rem;font-weight:600;color:var(--text);margin-left:.25rem;}
+    .lang-select button{margin-left:.5rem;border:none;background:transparent;font-weight:600;cursor:pointer;padding:.25rem .5rem;border-radius:.25rem;}
+    .lang-select button.active{background:var(--accent);color:#fff;}
+    main{max-width:900px;margin:3rem auto;padding:0 5vw;}
+    section{margin-bottom:3rem;}
+    h2{font-size:1.4rem;color:var(--accent);margin-bottom:1rem;}
+    ul{list-style:square inside;}
+    footer{background:#fff;padding:1.5rem 5vw;text-align:center;border-top:1px solid #eee;font-size:.9rem;}
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display:flex;flex-direction:column;gap:.2rem;">
+      <h1 data-i18n="company">UFORATSTO INC</h1>
+      <p class="tagline" data-i18n="tagline">Spread Light</p>
+    </div>
+    <div class="lang-select">
+      <button data-lang="en" class="active">EN</button>
+      <button data-lang="ru">RU</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2 data-i18n="about_title">About Us</h2>
+      <p data-i18n="about_text">
+        UFORATSTO INC is a New York–based trading and logistics company. We operate a modern 3PL prep-center that handles warehousing, labeling, and order fulfillment for e-commerce sellers; provide representative-office services for foreign businesses entering the U.S. market; and import a broad range of products — including building materials and food products.
+      </p>
+    </section>
+
+    <section id="services">
+      <h2 data-i18n="services_title">Services</h2>
+      <ul>
+        <li data-i18n="svc1">3PL & Prep-Center (Amazon FBA/FBM, Walmart WFS/Seller Fulfilled, DTC)</li>
+        <li data-i18n="svc2">Representative-office services in the USA</li>
+        <li data-i18n="svc3">Import of products, building materials & food</li>
+        <li data-i18n="svc4">Wholesale distribution</li>
+        <li data-i18n="svc5">Last-mile delivery across the USA</li>
+        <li data-i18n="svc6">Private-label sourcing</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2 data-i18n="contact_title">Contact</h2>
+      <p><strong data-i18n="address_label">Address:</strong> 170 53rd St, Unit 202, Brooklyn, NY 11232, USA</p>
+      <p><strong data-i18n="phone_label">Phone:</strong> <a href="tel:+19296604040">+1 (929) 660-4040</a></p>
+      <p><strong data-i18n="email_label">Email:</strong> <a href="mailto:info@uforatsto.com">info@uforatsto.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <span data-i18n="footer">© 2023 UFORATSTO INC — All rights reserved.</span>
+  </footer>
+
+  <script>
+    const translations={
+      en:{company:"UFORATSTO INC",tagline:"Spread Light",about_title:"About Us",about_text:"UFORATSTO INC is a New York–based trading and logistics company. We operate a modern 3PL prep-center that handles warehousing, labeling, and order fulfillment for e-commerce sellers; provide representative-office services for foreign businesses entering the U.S. market; and import a broad range of products — including building materials and food products.",services_title:"Services",svc1:"3PL & Prep-Center (Amazon FBA/FBM, Walmart WFS/Seller Fulfilled, DTC)",svc2:"Representative-office services in the USA",svc3:"Import of products, building materials & food",svc4:"Wholesale distribution",svc5:"Last-mile delivery across the USA",svc6:"Private-label sourcing",contact_title:"Contact",address_label:"Address:",phone_label:"Phone:",email_label:"Email:",footer:"© 2023 UFORATSTO INC — All rights reserved."},
+      ru:{company:"UFORATSTO INC",tagline:"Spread Light",about_title:"О компании",about_text:"UFORATSTO INC — торгово-логистическая компания из Нью-Йорка. Мы управляем современным 3PL преп-центром (склад, маркировка, фулфилмент для e-commerce), представляем интересы зарубежных компаний в США и занимаемся импортом широкого спектра товаров, стройматериалов и продуктов питания.",services_title:"Услуги",svc1:"3PL и Prep-центр (Amazon FBA/FBM, Walmart WFS/Seller Fulfilled, DTC)",svc2:"Представительские услуги в США",svc3:"Импорт товаров, стройматериалов и продуктов питания",svc4:"Оптовая дистрибуция",svc5:"Последняя миля по США",svc6:"Поиск товаров под СТМ",contact_title:"Контакты",address_label:"Адрес:",phone_label:"Телефон:",email_label:"E-mail:",footer:"© 2023 UFORATSTO INC — Все права защищены."}
+    };
+
+    const buttons=document.querySelectorAll('[data-lang]');
+    const translatable=document.querySelectorAll('[data-i18n]');
+    function switchLang(lang){
+      translatable.forEach(el=>{
+        const key=el.getAttribute('data-i18n');
+        if(translations[lang][key]) el.textContent=translations[lang][key];
+      });
+      buttons.forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+      document.documentElement.lang=lang;
+    }
+    buttons.forEach(btn=>btn.addEventListener('click',()=>switchLang(btn.dataset.lang)));
+    switchLang('en');
+  </script>
+</body>
+</html>
